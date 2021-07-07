@@ -1,18 +1,33 @@
-// Packages and modules needed for execution //
+// PACKAGES NEEDED FOR EXECUTION //
 const inquirer = require("inquirer");
 const fs = require("fs");
 
+// MODULES NEEDED FOR EXECUTION //
 const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
+// LIST OF FUNCTIONS //
+// Init() -- initial function call to begin entering team members //
+// enterTeamMembers() -- script to prompt user for team member information //
+// yesNoMoreTeamMembers() -- prompts user if more members are to be added //
+
+
+// VARIABLES //
 const teamArray = [];
 
 
-// Prompts users with questions to create an array called answers.  .then calls function to create badge and write new README.file //
-// const answers = {name, id, email, role, officeNumber, github, school} //    
+
+    
+// Initial function call to begin entering team members //
 function init(){
+    enterTeamMembers();
+}; // end of init
+
+// Prompts users with questions to create an array called teamArray //
+// const answers = {name, id, email, role, officeNumber, github, school} //
+function enterTeamMembers(){
     inquirer
         .prompt([
 
@@ -84,42 +99,51 @@ function init(){
                         const intern = new Intern(name, id, email, role, school);
                         teamArray.push(intern);
                         break;
-                }
+                } // end of switch
 
+                console.log(teamArray);
+                yesNoMoreTeamMembers();
 
+            }) // end of .then
 
+}; // end of enterTeamMembers
 
+// Prompts user if more members are to be added
+function yesNoMoreTeamMembers(){
+    inquirer
+        .prompt([
 
+            {
+                type: 'list',
+                name: 'addMoreEmployees',
+                message: 'Do you want to enter more team members?',
+                choices: ['Yes', 'No'],
+            },
 
+        ]).then (addMore => {
 
-
-
-
- 
-/*                     const employee = new Employee(name, id, email, role, officeNumber, github, school);
-            
-                    teamArray.push(employee); 
-                    console.log(employee); */
-                    console.log(teamArray);
-                })
-
-
-
-               /*  console.log("My Answers: " + answers);
-
-                // someAction //
-                functionname(answers);
-
+            const { addMoreEmployees } = addMore;
+            if (addMore.addMoreEmployees === 'Yes') {
+                enterTeamMembers(); 
+            } else {
+                console.log(teamArray);
+            /*
                 // Creates the index.html file //
                 const htmlcontent = newFile(answers);
 
                 // Writes the index.html file //
                 fs.writeFile("index.html", htmlcontent, (err) => err? console.log(err) : console.log("success!"));
-        }) */
-    // End of inquirer //
-}; 
-// End of init //
+            */
+            }
 
+        }); // end of .then
+
+} // end of yesNoMoreTeamMembers
+
+
+
+
+// EXECUTION //
 // Function call to initialize app //
 init();
 
