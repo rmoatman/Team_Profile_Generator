@@ -1,10 +1,13 @@
 // Packages and modules needed for execution //
 const inquirer = require("inquirer");
 const fs = require("fs");
+
 const Employee = require('./lib/Employee');
-const {Manager} = require('./lib/Manager');
-const {Engineer} = require('./lib/Engineer');
-const {Intern} = require('./lib/Intern');
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
+
+const teamArray = [];
 
 
 // Prompts users with questions to create an array called answers.  .then calls function to create badge and write new README.file //
@@ -31,17 +34,11 @@ function init(){
                 message: 'What is your email?',
             },
 
-/*             {
+             {
                 type: 'list',
                 name: 'role',
                 message: 'What is your role?',
                 choices: ['Manager', 'Engineer', 'Intern'],
-            }, */
-
-            {
-                type: 'confirm',
-                name: 'role',
-                message: 'Are you a Manager?'
             },
 
             // If role = Manager
@@ -49,15 +46,7 @@ function init(){
                 type: 'input',
                 name: 'officeNumber',
                 message: 'What is your office number?',
-                when(answers) {
-                    return answers.role;
-                }
-            },
-
-            {
-                type: 'confirm',
-                name: 'role',
-                message: 'Are you an Engineer?'
+                when: (input) => input.role === "Manager",
             },
 
             // If role = Engineer
@@ -65,15 +54,7 @@ function init(){
                 type: 'input',
                 name: 'github',
                 message: 'What is your github username?',
-                when(answers) {
-                    return answers.role;
-                }
-            },
-
-            {
-                type: 'confirm',
-                name: 'role',
-                message: 'Are you an Intern?'
+                when: (input) => input.role === "Engineer",
             },
 
             // If role = Intern
@@ -81,15 +62,50 @@ function init(){
                 type: 'input',
                 name: 'school',
                 message: 'What school are you attending?',
-                when(answers) {
-                    return answers.role;
-                }
+                when: (input) => input.role === "Intern",
             },
 
+            ]).then(teamInput => {
 
-            ]).then(function(answers){
+                const  { name, id, email, role, officeNumber, github, school } = teamInput;
 
-                console.log("My Answers: " + answers);
+                switch (teamInput.role) {
+                    case "Manager":
+                        const manager = new Manager(name, id, email, role, officeNumber);
+                        teamArray.push(manager);
+                        break;
+    
+                    case "Engineer":
+                        const engineer = new Engineer(name, id, email, role, github);
+                        teamArray.push(engineer);
+                        break;
+
+                    case "Intern":
+                        const intern = new Intern(name, id, email, role, school);
+                        teamArray.push(intern);
+                        break;
+                }
+
+
+
+
+
+
+
+
+
+
+ 
+/*                     const employee = new Employee(name, id, email, role, officeNumber, github, school);
+            
+                    teamArray.push(employee); 
+                    console.log(employee); */
+                    console.log(teamArray);
+                })
+
+
+
+               /*  console.log("My Answers: " + answers);
 
                 // someAction //
                 functionname(answers);
@@ -99,7 +115,7 @@ function init(){
 
                 // Writes the index.html file //
                 fs.writeFile("index.html", htmlcontent, (err) => err? console.log(err) : console.log("success!"));
-        })
+        }) */
     // End of inquirer //
 }; 
 // End of init //

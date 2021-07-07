@@ -45,6 +45,7 @@ create Employee class with:
 
 create Manager class to extend Employee with:
     officeNumber
+    getOfficeNumber()
     getRole() - overrides to returns 'Manager'
 
 create Engineer class to extend Employee with:
