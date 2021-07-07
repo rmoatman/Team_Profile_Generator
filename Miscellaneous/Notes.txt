@@ -64,3 +64,29 @@ create tests
 create video
 
 create readme
+
+
+
+const teamArray1 = [
+    {
+      name: 'dd',
+      id: 'dd',
+      email: 'dd',
+      role: 'Manager',
+      officeNumber: 'dddd'
+    },
+    {
+      name: 'ee',
+      id: 'ee',
+      email: 'eeee',
+      role: 'Engineer',
+      github: 'eeee'
+    },
+    {
+      name: 'ii',
+      id: 'iiii',
+      email: 'iiii',
+      role: 'Intern',
+      school: 'iiiii'
+    }
+  ];

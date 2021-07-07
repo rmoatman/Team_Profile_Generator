@@ -1,3 +1,10 @@
+const teamArray = require("../index");
+
+// New Index.html contents //
+function createNewHtmlFile() {
+    
+const newHtml = (teamArray) =>
+`
 <!doctype html>
 <html lang="en">
   <head>
@@ -20,8 +27,12 @@
             </div>
         </div>
     </header>
+    ${teamArray[0].name}
+`
 
-    <div class="container">
+
+/* 
+`    <div class="container">
         <div class="row"
             <!-- Manager Card -->
             <div class="card m-5 col-4 mx-auto" style="width: 18rem;">
@@ -129,3 +140,11 @@
   </body>
 
 </html>
+` */
+console.log("newHtml is next");
+console.log(newHtml);
+console.log("teamArray is next")
+console.log(teamArray);
+};
+
+module.exports = { createNewHtmlFile };
