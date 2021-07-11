@@ -58,7 +58,7 @@ function newHtml(teamArray){
                 
                     <div>
                         <p class="card-text">ID: ${teamArray[i].getId()}</p>
-                        <p class="card-text">Email: ${teamArray[i].getEmail()}</p>
+                        <p class="card-text">Email: <a href="mailto:${teamArray[i].getEmail()}">${teamArray[i].getEmail()}</a></p>
                         <p class="card-text">Office Number: ${teamArray[i].getOfficeNumber()}</p>
                     </div>
                 </div>
@@ -84,8 +84,8 @@ function newHtml(teamArray){
                 
                     <div>
                         <p class="card-text">ID: ${teamArray[i].getId()}</p>
-                        <p class="card-text">Email: ${teamArray[i].getEmail()}</p>
-                        <p class="card-text">GitHub: ${teamArray[i].getGithub()}</p>
+                        <p class="card-text">Email: <a href="mailto:${teamArray[i].getEmail()}">${teamArray[i].getEmail()}</a></p>
+                        <p class="card-text">GitHub: <a href="http://github.com/${teamArray[i].getGithub()}" target="_blank">${teamArray[i].getGithub()}</a></p>
                     </div>
                 </div>
                 </div><!-- end of engineer card -->
@@ -110,7 +110,7 @@ function newHtml(teamArray){
             
                 <div>
                     <p class="card-text">ID: ${teamArray[i].getId()}</p>
-                    <p class="card-text">Email: ${teamArray[i].getEmail()}</p>
+                    <p class="card-text">Email: <a href="mailto:${teamArray[i].getEmail()}">${teamArray[i].getEmail()}</a></p>
                     <p class="card-text">School: ${teamArray[i].getSchool()}</p>
                 </div>
             </div>

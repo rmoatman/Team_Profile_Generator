@@ -1,10 +1,11 @@
 {
   "name": "Team_Profile_Generator",
   "version": "1.0.0",
-  "description": "",
+  "description": "An application that creates a team profile based on user input",
   "main": "index.js",
   "directories": {
     "lib": "lib",
+    "src": "src",
     "test": "tests"
   },
   "dependencies": {
@@ -16,6 +17,6 @@
     "test": "jest"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Raemarie Oatman",
+  "license": "MIT"
 }

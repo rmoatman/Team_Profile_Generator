@@ -6,7 +6,7 @@ const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-const newHtml = require('./dist/generateHtml');
+const newHtml = require('./src/generateHtml');
 
 // VARIABLES //
 const teamArray = [];
