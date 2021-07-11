@@ -1,14 +1,17 @@
-const Employee = require('../lib/Employee');
 const Engineer = require('../lib/Engineer');
 
 describe("Engineer", () => {
-    describe("getGitHub", () => {
-        // Test for addition of GitHub property to employee //
-        it("should append an object with a git Hub Username if an engineer and if provided valid arguments", () => {
-            const engineer = new Engineer("Bob", 727, "bob@email.com", "Engineer", "btaylor");
+    describe("Initialization", () => {
+        // Test for creation of new object if Name, ID, Email, GitHubUsername, and Role are provided //
+        it("should create an object with a Name, ID, Email, GitHubUsername, and Role if provided valid arguments", () => {
+            const engineer = new Engineer("Adam", "1014", "adam@email.com", "theBoss", "Engineer");
   
-            // Verify that the object has the correct properties
-            expect(Employee.github).toEqual("btaylor");
+            // Verify that the new object has the correct properties
+            expect(engineer.name).toEqual("Adam");
+            expect(engineer.id).toEqual("1014");
+            expect(engineer.email).toEqual("adam@email.com");
+            expect(engineer.getGithub()).toEqual("theBoss");
+            expect(engineer.getRole()).toEqual("Engineer");
         });
     });
 });
