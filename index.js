@@ -7,147 +7,184 @@ const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
+const newFile = ""; //require("./Miscellaneous/generateMarkdown");
+//const newHtml = require('./dist/generateHtml');
 
 
 // LIST OF FUNCTIONS //
 // Init() -- initial function call to begin entering team members //
-// enterTeamMembers() -- script to prompt user for team member information //
+// getManager -- script to prompt user for Manager information //
+// addOtherEmployees -- script to add Engineers and Interns //
 // yesNoMoreTeamMembers() -- prompts user if more members are to be added //
 
 
 // VARIABLES //
 const teamArray = [];
-const finalHTML = [];
+const finalHTML = "";
+let str = "";
+const newHtmlPart1 = "";
+const newHtmlPart2m = "";
+const newHtmlPart2e = "";
+const newHtmlPart2i = "";
+const newHtmlPart3 = "";
+let interimString = "";
+
+
+
 
     
 // Initial function call to begin entering team members //
 function init(){
-    enterTeamMembers();
+    
+    getManager();
+
 }; // end of init
 
-// Prompts users with questions to create an array called teamArray //
-// const answers = {name, id, email, role, officeNumber, github, school} //
-function enterTeamMembers(){
-    inquirer
-        .prompt([
+const getManager = () => {
+    return inquirer.prompt ([
 
-            {
-                type: 'input',
-                name: 'name',
-                message: 'What is your name?',
-            },
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What is the name of the Project Manager?',
+        },
 
-            {
-                type: 'input',
-                name: 'id',
-                message: 'What is your id?',
-            },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'What is the Project Manager id?',
+        },
 
-            {
-                type: 'input',
-                name: 'email',
-                message: 'What is your email?',
-            },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'What is the Project Manager email?',
+        },
 
-             {
-                type: 'list',
-                name: 'role',
-                message: 'What is your role?',
-                choices: ['Manager', 'Engineer', 'Intern'],
-            },
+        {
+            type: 'input',
+            name: 'officeNumber',
+            message: 'What is your office number?',
+        },
 
-            // If role = Manager
-            {
-                type: 'input',
-                name: 'officeNumber',
-                message: 'What is your office number?',
-                when: (input) => input.role === "Manager",
-            },
+    ]) // end return inquirer.prompt
 
-            // If role = Engineer
-            {
-                type: 'input',
-                name: 'github',
-                message: 'What is your github username?',
-                when: (input) => input.role === "Engineer",
-            },
-
-            // If role = Intern
-            {
-                type: 'input',
-                name: 'school',
-                message: 'What school are you attending?',
-                when: (input) => input.role === "Intern",
-            },
-
-            ]).then(teamInput => {
-
-                const  { name, id, email, role, officeNumber, github, school } = teamInput;
-
-                switch (teamInput.role) {
-                    case "Manager":
-                        const manager = new Manager(name, id, email, role, officeNumber);
-                        teamArray.push(manager);
-                        break;
+    .then (managerInfo => {
+        const { name, id, email, officeNumber } = managerInfo;
+        const manager = new Manager(name, id, email, officeNumber);
     
-                    case "Engineer":
-                        const engineer = new Engineer(name, id, email, role, github);
-                        teamArray.push(engineer);
-                        break;
+        teamArray.push(manager);
+        console.log(" ");
+        console.log("Now, let's enter the rest of the team!")
+        console.log(" ");
+        //console.log(manager);
+        //console.log(teamArray);
+        addOtherEmployees();
 
-                    case "Intern":
-                        const intern = new Intern(name, id, email, role, school);
-                        teamArray.push(intern);
-                        break;
-                } // end of switch
+    }); // end of .then
 
-                console.log(teamArray);
-                yesNoMoreTeamMembers();
+} // end const getManager
 
-            }) // end of .then
+const addOtherEmployees = () => {
+    return inquirer.prompt ([
+        
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What is the employee`s name?',
+        },
 
-}; // end of enterTeamMembers
+        {
+            type: 'input',
+            name: 'id',
+            message: 'What is the employee`s id?',
+        },
 
-// Prompts user if more members are to be added
-function yesNoMoreTeamMembers(){
-    inquirer
-        .prompt([
+        {
+            type: 'input',
+            name: 'email',
+            message: 'What is the employee`s email?',
+        },
+                
+        {
+            type: 'list',
+            name: 'role',
+            message: 'What is the employee`s role?',
+            choices: ['Engineer', 'Intern'],
+        },
+        
+        // If role = Engineer
+        {
+            type: 'input',
+            name: 'github',
+            message: 'What is the Engineer`s gitHub username?',
+            when: (input) => input.role === "Engineer",
+        },
+        
+        // If role = Intern
+        {
+            type: 'input',
+            name: 'school',
+            message: 'What school is the Intern attending?',
+            when: (input) => input.role === "Intern",
+        },
 
-            {
-                type: 'list',
-                name: 'addMoreEmployees',
-                message: 'Do you want to enter more team members?',
-                choices: ['Yes', 'No'],
-            },
+    ]) // end of return inquirer.prompt
 
-        ]).then (addMore => {
+    .then (employeeInfo => {
+        const { name, id, email, github, school  } = employeeInfo;
+        
+        if (employeeInfo.role === "Engineer") {
+            const employee = new Engineer(name, id, email, github);
 
-            const { addMoreEmployees } = addMore;
-            if (addMore.addMoreEmployees === 'Yes') {
-                enterTeamMembers(); 
-            } else {
-/*                 console.log(teamArray); */
-/*                 console.log(teamArray[1].role); */
-                createNewHtmlFile();
+            teamArray.push(employee);
+            //console.log(teamArray);
 
-            /*
-                // Creates the index.html file //
-                const htmlcontent = newFile(answers);
+        } else {
+            const employee = new Intern(name, id, email, school);
 
-                // Writes the index.html file //
-                fs.writeFile("index.html", htmlcontent, (err) => err? console.log(err) : console.log("success!"));
-            */
-            }
+            teamArray.push(employee);
+            console.log(teamArray);
+        }; // end if else
 
-        }); // end of .then
+        console.log(" ");
+        yesNoMoreTeamMembers();
+        
+    }); // end of .then
+
+} // end of addOtherEmployees
+
+// Prompts user if more team members are to be added
+const yesNoMoreTeamMembers = () => {
+    return inquirer.prompt ([
+
+        {
+            type: 'list',
+            name: 'addMoreEmployees',
+            message: 'Do you want to enter more team members?',
+            choices: ['Yes', 'No'],
+        },
+    
+    ]) // end of .prompt
+        
+    .then (addMore => {
+        if (addMore.addMoreEmployees === 'Yes') {
+            addOtherEmployees(); 
+
+        } else {
+            console.log("finished entering employees");
+            console.log("This is my team:");
+            console.log(teamArray);
+            newHtml(teamArray);
+            console.log()
+        } // end of if else
+    }); // end of .then
 
 } // end of yesNoMoreTeamMembers
 
-
 // New Index.html contents //
-function createNewHtmlFile() {
-    
-    // Create the beginning of the team.html file
+//function createNewHtmlFile() {
+function newHtml(){
     const newHtmlPart1 = 
     `
     <!doctype html>
@@ -172,47 +209,57 @@ function createNewHtmlFile() {
                 </div>
             </div>
         </header>
-
+  
         <div class="container">
             <div class="row"
        `
-       finalHTML.push(newHtmlPart1);
+       ;
+//lat
+       //finalHTML.push(newHtmlPart1);
     
     // determine what card to add and push to finalHTML array
-        console.log("add part 2");
+
+         console.log("add part 2");
        for (var i=0; i < teamArray.length; i++){
-
-           switch(teamArray[i].role){
-
+  
+        //console.log(teamArray[i].getRole());}
+        
+        {
+           switch(teamArray[i].getRole()){
+  
             case "Manager":
                 const newHtmlPart2m = 
-`
-<!-- Manager Card -->
-<div class="card m-5 col-4 mx-auto" style="width: 18rem;">
+  `
+  <!-- Manager Card -->
+  <div class="card m-5 col-4 mx-auto" style="width: 18rem;">
     <div class="card-body">
         <div class="bg-danger py-2 mb-2">
             <h5 class="card-title text-center">Manager</h5>
-            <h5 class="card-title text-center">${teamArray[i].name}</h5>
+            <h5 class="card-title text-center">${teamArray[i].getName()}</h5>
         </div>
     
         <div>
-            <p class="card-text">ID: ${teamArray[i].id}</p>
-            <p class="card-text">Email: ${teamArray[i].email}</p>
-            <p class="card-text">Office Number: ${teamArray[i].officeNumber}</p>
+            <p class="card-text">ID: ${teamArray[i].getId()}</p>
+            <p class="card-text">Email: ${teamArray[i].getEmail()}</p>
+            <p class="card-text">Office Number: ${teamArray[i].getOfficeNumber()}</p>
         </div>
     </div>
-</div><!-- end of Manager card -->
-
-`
-                finalHTML.push(newHtmlPart2m);
-                console.log(finalHTML);
+  </div><!-- end of Manager card -->
+  
+  `
+  //lat
+                interimString = str.concat(newHtmlPart1, newHtmlPart2m);
+                console.log("interimString: ");
+                console.log(interimString);
+                //finalHTML.push(newHtmlPart2m);
+                //console.log(finalHTML);
                 break;
-
+  
             case "Engineer":
                 const newHtmlPart2e = 
-`
-<!-- Engineer Card -->
-<div class="card m-5 col-4 mx-auto" style="width: 18rem;">
+  `
+  <!-- Engineer Card -->
+  <div class="card m-5 col-4 mx-auto" style="width: 18rem;">
     <div class="card-body">
         <div class="bg-primary py-2 mb-2">
             <h5 class="card-title text-center">Engineer</h5>
@@ -220,23 +267,25 @@ function createNewHtmlFile() {
         </div>
     
         <div>
-            <p class="card-text">ID: ${teamArray[i].id}</p>
-            <p class="card-text">Email: ${teamArray[i].email}</p>
-            <p class="card-text">GitHub: ${teamArray[i].github}</p>
+            <p class="card-text">ID: ${teamArray[i].getId()}</p>
+            <p class="card-text">Email: ${teamArray[i].getEmail()}</p>
+            <p class="card-text">GitHub: ${teamArray[i].getGithub()}</p>
         </div>
     </div>
-</div><!-- end of engineer card -->
-
-`
-                finalHTML.push(newHtmlPart2e);
-                console.log(finalHTML);
+  </div><!-- end of engineer card -->
+  
+  `
+  //lat
+                interimString = interimString.concat(newHtmlPart2e);            
+  //finalHTML.push(newHtmlPart2e);
+                //console.log(finalHTML);
                 break;
-
+  
             case "Intern":
                 const newHtmlPart2i =
-`
-<!-- Intern Card -->
-<div class="card m-5 col-4 mx-auto" style="width: 18rem;">
+  `
+  <!-- Intern Card -->
+  <div class="card m-5 col-4 mx-auto" style="width: 18rem;">
     <div class="card-body">
         <div class="bg-success py-2 mb-2">
             <h5 class="card-title text-center">Intern</h5>
@@ -244,23 +293,28 @@ function createNewHtmlFile() {
         </div>
     
         <div>
-            <p class="card-text">ID: ${teamArray[i].id}</p>
-            <p class="card-text">Email: ${teamArray[i].email}</p>
-            <p class="card-text">School: ${teamArray[i].school}</p>
+            <p class="card-text">ID: ${teamArray[i].getId()}</p>
+            <p class="card-text">Email: ${teamArray[i].getEmail()}</p>
+            <p class="card-text">School: ${teamArray[i].getSchool()}</p>
         </div>
     </div>
-</div><!-- end of intern card -->
-
-`
-                finalHTML.push(newHtmlPart2i);
-                console.log(finalHTML);
+  </div><!-- end of intern card -->
+  
+  `
+  //lat
+                interimString = interimString.concat(newHtmlPart2i);
+                //finalHTML.push(newHtmlPart2i);
+                //console.log(finalHTML);
                 break;
-
+  
             }; // end of switch
-       }; // end of for
-
+       }; 
+    };// end of for
+  
     // Add end of team.html file //
     console.log("add part 3");
+
+
     const newHtmlPart3 = 
     `    
             </div><!-- end of row -->
@@ -274,18 +328,23 @@ function createNewHtmlFile() {
     
     </html>
     `
-    finalHTML.push(newHtmlPart3);
-
-
+    //lat
+    // finalHTML.push(newHtmlPart3);
+    const finalHTML = str.concat(interimString, newHtmlPart3 )
     console.log(finalHTML);
-}; // end of createNewHtmlFile
+
+                // Creates the README.md file //
+                
+
+                // Writes the README.md file //
+                fs.writeFile("index.html", finalHTML, (err) => err? console.log(err) : console.log("success!"));
+                
+
+  }; // end of createNewHtmlFile */
+
 
 
 
 // EXECUTION //
 // Function call to initialize app //
 init();
-
-
-
-

@@ -1,9 +1,9 @@
 const teamArray = require("../index");
 
 // New Index.html contents //
-function createNewHtmlFile() {
+//function createNewHtmlFile() {
     
-const newHtml = (teamArray) =>
+//const newHtml = (teamArray) =>
 `
 <!doctype html>
 <html lang="en">
@@ -141,10 +141,6 @@ const newHtml = (teamArray) =>
 
 </html>
 ` */
-console.log("newHtml is next");
-console.log(newHtml);
-console.log("teamArray is next")
-console.log(teamArray);
-};
+//};
 
-module.exports = { createNewHtmlFile };
+module.exports = { newHtml };
