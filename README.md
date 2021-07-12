@@ -66,8 +66,8 @@ The tests validate the class and subclass relationships and their individual con
 
 ## Questions
 
-Have a question or comment?  Please contact me at:
-Raemarie Oatman
-GitHub Profile: github.com/rmoatman
-raemarie.oatman@gmail.com
+Have a question or comment?  Please contact me at:<br>
+Raemarie Oatman<br>
+GitHub Profile: github.com/rmoatman<br>
+raemarie.oatman@gmail.com<br>
 
