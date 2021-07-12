@@ -2,8 +2,8 @@ const Employee = require('../lib/Employee');
 
 describe("Employee", () => {
     describe("Initialization", () => {
-        // Test for creation of new object if Name, ID, Email, and Role are provided //
-        it("should create an object with a Name, ID, Email, and Role if provided valid arguments", () => {
+        // Test for creation of new object if Name, ID, and Email are provided //
+        it("should create an object with a Name, ID, and Email if provided valid arguments", () => {
             const employee = new Employee("Curt", "422", "curt@email.com");
   
             // Verify that the new object has the correct properties
