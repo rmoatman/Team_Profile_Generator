@@ -43,7 +43,7 @@ To run the app, use the command:
 ~~~
 node index.js
 ~~~
-A demonstration video can be found here: INSERT VIDEO HERE
+A demonstration video can be found here: https://drive.google.com/file/d/1JS-ggMSbJHEYY9PUEnPZ2OFo7XaNqxAw/view
 <br><br>
 ## License
 
@@ -61,7 +61,7 @@ Testing can be completed by using the following command:
 ~~~
 npm test
 ~~~
-The tests validate the class and subclass relationships and their individual constructors.  A demonstration video can be found here:  INSERT VIDEO HERE
+The tests validate the class and subclass relationships and their individual constructors.  A demonstration video can be found here:  https://drive.google.com/file/d/1Z2nr0ApR4An6aJ5uLv75YHHQn4tq8jwK/view
 <br><br>
 
 ## Questions

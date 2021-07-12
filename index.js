@@ -128,7 +128,7 @@ const addOtherEmployees = () => {
             const employee = new Intern(name, id, email, school);
 
             teamArray.push(employee);
-            console.log(teamArray);
+            //console.log(teamArray);
         }; // end if else
 
         console.log(" ");
